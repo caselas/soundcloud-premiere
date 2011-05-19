@@ -775,7 +775,15 @@ $(function(){
 		
 		// Set the position in SoundManager2
 		
-		soundManager.setPosition('track_' + $track.id, position).play();
+		if($('li').hasClass('playing')) {
+		
+			soundManager.setPosition('track_' + $track.id, position).play();
+			
+		} else {
+			
+			soundManager.setPosition('track_' + $track.id, position);
+			
+		}
 		
 	}
 	
