@@ -9,193 +9,183 @@ $button-color: white;
 $shadow-color: rgba(0,0,0,0.25);
 
 @mixin background-gradient($color){
-	background: $color;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($color), to($color), color-stop(.4,lighten($color, 10%)), color-stop(.6,lighten($color, 10%)));
-	background: -moz-linear-gradient(top, $color, lighten($color, 10%) 40%, lighten($color, 10%) 60%, $color);	
+  background: $color;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($color), to($color), color-stop(.4,lighten($color, 10%)), color-stop(.6,lighten($color, 10%)));
+  background: -moz-linear-gradient(top, $color, lighten($color, 10%) 40%, lighten($color, 10%) 60%, $color);
 }
 @mixin border-radius($size){
-	border-radius: $size; 
-	-moz-border-radius: $size;
-	-webkit-border-radius: $size;
+  border-radius: $size;
+  -moz-border-radius: $size;
+  -webkit-border-radius: $size;
 }
 @mixin box-shadow{
-	box-shadow: 0 0 50px $shadow-color;
-	-moz-box-shadow: 0 0 50px $shadow-color;
-	-webkit-box-shadow: 0 0 50px $shadow-color;
+  box-shadow: 0 0 50px $shadow-color;
+  -moz-box-shadow: 0 0 50px $shadow-color;
+  -webkit-box-shadow: 0 0 50px $shadow-color;
 }
 @mixin background-lighten($color, $amount){
-	
-	@if lightness($color) < 50% { 
-		background-color: lighten($color, $amount);
-	} @else { 
-		background-color: darken($color, $amount);
-	}
-	
-}
 
-@-webkit-keyframes 'glow'{
-  0% { -webkit-box-shadow: 0 0 5px rgba(225,225,225,.3); }
-  100% { -webkit-box-shadow: 0 0 20px rgba(255,225,225,1); }
+  @if lightness($color) < 50% {
+    background-color: lighten($color, $amount);
+  } @else {
+    background-color: darken($color, $amount);
+  }
+
 }
 
 body{
-	
-	background: $background-color url(/images/bg.jpg) center center no-repeat;
-	color: $text-color;
-	font: 12px Futura, 'Lucida Grande', Helvetica, sans-serif;
-	
-	//h1{ font-size: 18px; }
-	
-	a{
-		
-		color: $text-color;
-		text-decoration: none;
-		-webkit-transition: color 1s;
-		
-		&:hover{ color: $accent-color; }
-		
-	}
-	
-	// Header
-	
-	.header{
-		
-		.time{
-			
-			.buffer{
-				
-				@if lightness($background-color) < 50% { @include background-gradient( lighten($background-color, 20%) );
-					
-				} @else { @include background-gradient( darken($background-color, 20%) ); }
-				
-			}
 
-			.played{ @include background-gradient($accent-color); }
-			
-		}
-		
-		.comments{
-			
-			background-color: transparentize($background-color, 0.2);
-			
-			.comment{ border-left: 1px solid whiteSmoke; }
-			
-		}
-		
-	}
-	
-	// Player
-	
-	.player{
-		
-		.panel{
+  background: $background-color url(/images/bg.jpg) center center no-repeat;
+  color: $text-color;
+  font: 12px Futura, 'Lucida Grande', Helvetica, sans-serif;
 
-			background-color: $background-color;
-			@include box-shadow;
-			
-			&, .artwork, .artwork img{ @include border-radius($radius); }
-			
-			// Left Panel
-			
-			&.left{
-				
-				.artwork{
-					
-					.lock{
-						
-						background-color: $background-color;
-						background: -webkit-gradient(linear, 0% 0%, 100% 0%, from($background-color), to($background-color), color-stop(0.5, rgba($background-color, 0.8)));
-						background: -moz-linear-gradient(left, $background-color, rgba($background-color, 0.8) 50%, $background-color);
-						
-						.submit{							
-							background-color: black;
-							@include border-radius(5px);
-							color: white;
-						}
-						
-					}
-					
-					.button{
+  //h1{ font-size: 18px; }
 
-						border: 3px solid $button-color;
-						@include border-radius(100px);				
-						-webkit-animation-name: 'glow';
-					  -webkit-animation-duration: 1s;
-					  -webkit-animation-iteration-count: infinite;
-					  -webkit-animation-direction: alternate;
-					  -webkit-animation-timing-function: ease-in-out;
-					
-						.play{ border-color: transparent transparent transparent $button-color; }
-						
-					}
-					
-				}
-				
-			}
-			
-			// Right Panel
-			
-			&.right{
-				
-				ol.tracks li{
-				
-					-webkit-transition-property: background;
-					-webkit-transition-duration: 2s;
-					
-					&:nth-child(odd){ @include background-lighten($background-color, 5%); }
-					
-					&.playing{
-						
-						background-color: $accent-color;
-						color: white;
-						
-					}
-					
-				}
-				
-			}
-			
-		}
-		
-	}
-	
-	// Footer
-	
-	.footer{
-		
-		background-color: $background-color;
-		
-		.logo a{
-			
-			@if lightness($background-color) < 50% { 
-				background: url(/images/soundcloud-white.png);
-			} @else {
-				background: url(/images/soundcloud-black.png);
-			}
+  a{
 
-		}
-		
-	}
-	
-	// Message
-	
-	.message{
+    color: $text-color;
+    text-decoration: none;
+    -webkit-transition: color 1s;
 
-		background-color: black;
-		background-color: rgba(0,0,0,0.5);
-		color: white;
-		font-size: 10px;
+    &:hover{ color: $accent-color; }
 
-	}
-	
-	// Scroll Bar
-	
-	.jspDrag{
-		
-		background: $scroll-color;
-		
-	}
-	
+  }
+
+  // Header
+
+  .header{
+
+    .time{
+
+      .buffer{
+
+        @if lightness($background-color) < 50% { @include background-gradient( lighten($background-color, 20%) );
+
+        } @else { @include background-gradient( darken($background-color, 20%) ); }
+
+      }
+
+      .played{ @include background-gradient($accent-color); }
+
+    }
+
+    .comments{
+
+      background-color: transparentize($background-color, 0.2);
+
+      .comment{ border-left: 1px solid whiteSmoke; }
+
+    }
+
+  }
+
+  // Player
+
+  .player{
+
+    .panel{
+
+      background-color: $background-color;
+      @include box-shadow;
+
+      &, .artwork, .artwork img{ @include border-radius($radius); }
+
+      // Left Panel
+
+      &.left{
+
+        .artwork{
+
+          .lock{
+
+            background-color: $background-color;
+            background: -webkit-gradient(linear, 0% 0%, 100% 0%, from($background-color), to($background-color), color-stop(0.5, rgba($background-color, 0.8)));
+            background: -moz-linear-gradient(left, $background-color, rgba($background-color, 0.8) 50%, $background-color);
+
+            .submit{
+              background-color: black;
+              @include border-radius(5px);
+              color: white;
+            }
+
+          }
+
+          .button{
+
+            border: 3px solid $button-color;
+            @include border-radius(100px);
+
+            .play{ border-color: transparent transparent transparent $button-color; }
+
+          }
+
+        }
+
+      }
+
+      // Right Panel
+
+      &.right{
+
+        ol.tracks li{
+
+          -webkit-transition-property: background;
+          -webkit-transition-duration: 2s;
+
+          &:nth-child(odd){ @include background-lighten($background-color, 5%); }
+
+          &.playing{
+
+            background-color: $accent-color;
+            color: white;
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  // Footer
+
+  .footer{
+
+    background-color: $background-color;
+
+    .logo a{
+
+      @if lightness($background-color) < 50% {
+        background: url(/images/soundcloud-white.png);
+      } @else {
+        background: url(/images/soundcloud-black.png);
+      }
+
+    }
+
+  }
+
+  // Message
+
+  .message{
+
+    background-color: black;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 10px;
+
+  }
+
+  // Scroll Bar
+
+  .jspDrag{
+
+    background: $scroll-color;
+
+  }
+
 }
 
 // Modernizr Fixes
@@ -203,20 +193,20 @@ body{
 // No Canvas
 
 .no-canvas .time{
-	
-	background-color: #f2f2f2 !important;
-	
-	.track{ background-color: $background-color; }
-	
+
+  background-color: #f2f2f2 !important;
+
+  .track{ background-color: $background-color; }
+
 }
 
 
 // Yes Canvas
 
 .canvas .time{
-	
-	background-color: $background-color;
-	
-	.track{ @include background-lighten($background-color, 5%); }
-	
+
+  background-color: $background-color;
+
+  .track{ @include background-lighten($background-color, 5%); }
+
 }

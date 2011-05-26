@@ -124,7 +124,7 @@ body {
           padding-left: 10px;
           text-overflow: ellipsis; }
   body .footer {
-    bottom: 18px;
+    bottom: 0px;
     height: 50px;
     width: 100%; }
     body .footer div {
