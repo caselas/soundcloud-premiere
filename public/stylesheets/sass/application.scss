@@ -9,8 +9,8 @@ $time: 50px;
 $waveform: 40px;
 
 @mixin background-size{
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
@@ -20,309 +20,309 @@ $waveform: 40px;
 html, body{ height: 100%; overflow: hidden; }
 
 body{
-	
-	@include background-size;
-	
-	& > div{ position: absolute; }
-	
-	// Header
-	
-	.header{
 
-		height: $comments + $time;
+  @include background-size;
 
-		div, canvas{ position: absolute; }
+  & > div{ position: absolute; }
 
-		&, & > div{ width: 100%; }
+  // Header
 
-		// Time
+  .header{
 
-		.time{
+    height: $comments + $time;
 
-			cursor: pointer;
-			height: $time;
-			overflow: hidden;
-			top: $comments;
-			
-			.waveform{ display: none; }
+    div, canvas{ position: absolute; }
 
-			div, canvas, img{
+    &, & > div{ width: 100%; }
 
-				height: $waveform;
-				top: ($time - $waveform) / 2;
-				width: 100%;
+    // Time
 
-			}
+    .time{
 
-			.buffer, .played{ width: 0; }
+      cursor: pointer;
+      height: $time;
+      overflow: hidden;
+      top: $comments;
 
-		}
+      .waveform{ display: none; }
 
-		// Comments
+      div, canvas, img{
 
-		.comments{
+        height: $waveform;
+        top: ($time - $waveform) / 2;
+        width: 100%;
 
-			cursor: pointer;
-			height: $comments;
+      }
 
-			.comment{
+      .buffer, .played{ width: 0; }
 
-				cursor: pointer;
-				height: $time + $comments;
-				width: $comments;
-				
-				.avatar, .avatar img{
-					height: $comments;
-					width: $comments;
-				}
+    }
 
-				.avatar{ @include background-size; }
+    // Comments
 
-			}
+    .comments{
 
-		}
+      cursor: pointer;
+      height: $comments;
 
-	}
-	
-	// Player
-	
-	.player{
-		
-		width: $panel * 2;
+      .comment{
 
-		&, .panel{ height: $panel; }
-		
-		.panel{
-			
-			left: $panel / 2;
-			width: $panel;
-			
-			&, & > div{ position: absolute; }
-			
-			& > div, & .artwork img {
+        cursor: pointer;
+        height: $time + $comments;
+        width: $comments;
 
-				height: $panel - $padding * 2;
-				left: $padding;
-				top: $padding;
-				width: $panel - $padding * 2;
+        .avatar, .avatar img{
+          height: $comments;
+          width: $comments;
+        }
 
-			}
-			
-			// Left Panel
-			
-			&.left{
-				
-				.artwork{	
+        .avatar{ @include background-size; }
 
-					@include background-size;
-					display: none;
-					
-					& > div{ position: absolute; }
-					
-					.lock{
-						
-						padding: 20px 0;
-						text-align: center;
-						top: ($panel - $padding * 2) / 2;
-						width: 100%;
-						
-						.instructions{
-							margin-bottom: 10px;
-						}
-						
-						.shared_message{
-							cursor: pointer;
-							text-decoration: underline;
-						}
-						
-						.submit{
-							display: inline-block;
-							padding: 5px 10px;
-						}
-						
-					}
-				
-					.button{
-						
-						cursor: pointer;
-						left: ($panel - $padding * 2) / 2 - $button / 2;
-						top: ($panel - $padding * 2) / 2 - $button / 2;
-						
-						&{
-							height: $button;
-							width: $button;
-						}
-						
-						.play{
-							
-							border-style: solid;
-							border-width: $play;
-							height: 0;
-							left: $button / 2 - ($play / 2 - 3px);
-							position: absolute;
-							top: $button / 2 - $play;
-							width: 0;
-							
-						}
-						
-					}
-					
-				}	
-				
-			}
-			
-			// Right Panel
-			
-			&.right{
-				
-				// Playlist Avatar
-				
-				.avatar{
-					height: $avatar;
-					width: $avatar;
-				}
-				
-				// Descriptions
-				
-				.description{
+      }
 
-					height: $avatar - 10;
-					left: $avatar + 20;
-					top: 15px;
-					width: $panel - 10 - $avatar - $padding * 2;
+    }
 
-				}
-				
-				// Tracks
-				
-				ol.tracks {
-					
-					height: $panel - $padding * 2 - $avatar - 10;
-					left: $padding;
-					list-style: none;
-					overflow: auto;
-					position: absolute;
-					top: $padding + $avatar + 10;
-					width: $panel - $padding * 2;
-					
-					li{
-						
-						cursor: pointer;
-						height: 25px;
-						line-height: 25px;
-						overflow: hidden;
-						padding-left: 10px;
-						text-overflow: ellipsis;
-						
-					}
+  }
 
-				}
-				
-			}
-			
-		}
-		
-	}
-	
-	// Footer
-	
-	.footer{
-		
-		bottom: $comments;
-		height: $time;
-		width: 100%;
-		
-		div{
-			bottom: 17px;
-			position: absolute;
-		}
-		
-		// Links
-		
-		.links{ left: 20px; a{ margin-right: 10px; } }
-		
-		// Share Buttons
-		
-		.share{
+  // Player
 
-			width: 200px;
+  .player{
 
-			.facebook-like-button{
-				left: 110px;
-				position: absolute;
-				top: 0px;
-			}
+    width: $panel * 2;
 
-		}
-		
-		// SoundCloud Logo
-		
-		.logo{
-			
-			right: 20px;
-			
-			a{
-				display: block;
-				height: 13px;
-				width: 30px;
-			}
-			
-		}
-		
-	}
-	
-	// Message
-	
-	.message{
+    &, .panel{ height: $panel; }
 
-		display: none;
-		//height: 50px;
-		padding: 10px;
-		top: $comments + $time;
-		width: 250px;
+    .panel{
 
-	}
+      left: $panel / 2;
+      width: $panel;
 
-	// Scroll Bar
-	
-	.jspContainer{
+      &, & > div{ position: absolute; }
 
-		overflow: hidden;
-		position: relative;
+      & > div, & .artwork img {
 
-		.jspPane{ position: absolute; }
+        height: $panel - $padding * 2;
+        left: $padding;
+        top: $padding;
+        width: $panel - $padding * 2;
 
-		.jspVerticalBar{
+      }
 
-			height: 100%;
-			position: absolute;		
-			right: 0;
-			top: 0;
-			width: $scroll;
+      // Left Panel
 
-			& *{ margin: 0; padding: 0; }
+      &.left{
 
-			.jspCap{ display: none; }
+        .artwork{
 
-			.jspTrack{
+          @include background-size;
+          display: none;
 
-				position: relative;
+          & > div{ position: absolute; }
 
-				.jspDrag{
+          .lock{
 
-					cursor: pointer;
-					left: 0;
-					position: relative;
-					top: 0;
+            padding: 20px 0;
+            text-align: center;
+            top: ($panel - $padding * 2) / 2;
+            width: 100%;
 
-				}
+            .instructions{
+              margin-bottom: 10px;
+            }
 
-			}		
+            .shared_message{
+              cursor: pointer;
+              text-decoration: underline;
+            }
 
-		}
+            .submit{
+              display: inline-block;
+              padding: 5px 10px;
+            }
 
-	}
-	
+          }
+
+          .button{
+
+            cursor: pointer;
+            left: ($panel - $padding * 2) / 2 - $button / 2;
+            top: ($panel - $padding * 2) / 2 - $button / 2;
+
+            &{
+              height: $button;
+              width: $button;
+            }
+
+            .play{
+
+              border-style: solid;
+              border-width: $play;
+              height: 0;
+              left: $button / 2 - ($play / 2 - 3px);
+              position: absolute;
+              top: $button / 2 - $play;
+              width: 0;
+
+            }
+
+          }
+
+        }
+
+      }
+
+      // Right Panel
+
+      &.right{
+
+        // Playlist Avatar
+
+        .avatar{
+          height: $avatar;
+          width: $avatar;
+        }
+
+        // Descriptions
+
+        .description{
+
+          height: $avatar - 10;
+          left: $avatar + 20;
+          top: 15px;
+          width: $panel - 10 - $avatar - $padding * 2;
+
+        }
+
+        // Tracks
+
+        ol.tracks {
+
+          height: $panel - $padding * 2 - $avatar - 10;
+          left: $padding;
+          list-style: none;
+          overflow: auto;
+          position: absolute;
+          top: $padding + $avatar + 10;
+          width: $panel - $padding * 2;
+
+          li{
+
+            cursor: pointer;
+            height: 25px;
+            line-height: 25px;
+            overflow: hidden;
+            padding-left: 10px;
+            text-overflow: ellipsis;
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  // Footer
+
+  .footer{
+
+    bottom: 0px;
+    height: $time;
+    width: 100%;
+
+    div{
+      bottom: 17px;
+      position: absolute;
+    }
+
+    // Links
+
+    .links{ left: 20px; a{ margin-right: 10px; } }
+
+    // Share Buttons
+
+    .share{
+
+      width: 200px;
+
+      .facebook-like-button{
+        left: 110px;
+        position: absolute;
+        top: 0px;
+      }
+
+    }
+
+    // SoundCloud Logo
+
+    .logo{
+
+      right: 20px;
+
+      a{
+        display: block;
+        height: 13px;
+        width: 30px;
+      }
+
+    }
+
+  }
+
+  // Message
+
+  .message{
+
+    display: none;
+    //height: 50px;
+    padding: 10px;
+    top: $comments + $time;
+    width: 250px;
+
+  }
+
+  // Scroll Bar
+
+  .jspContainer{
+
+    overflow: hidden;
+    position: relative;
+
+    .jspPane{ position: absolute; }
+
+    .jspVerticalBar{
+
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: $scroll;
+
+      & *{ margin: 0; padding: 0; }
+
+      .jspCap{ display: none; }
+
+      .jspTrack{
+
+        position: relative;
+
+        .jspDrag{
+
+          cursor: pointer;
+          left: 0;
+          position: relative;
+          top: 0;
+
+        }
+
+      }
+
+    }
+
+  }
+
 }
 
 // Modernizr Fix
