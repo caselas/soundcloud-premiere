@@ -112,8 +112,11 @@ body{
 
           .button{
 
+            background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba($button-color, 0.8)), to(rgba($button-color, 0)));
             border: 3px solid $button-color;
             @include border-radius(100px);
+
+            &:hover{ background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba($button-color, 0)), to(rgba($button-color, 0.8))); }
 
             .play{ border-color: transparent transparent transparent $button-color; }
 

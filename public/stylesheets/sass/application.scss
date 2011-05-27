@@ -145,13 +145,13 @@ body{
           .button{
 
             cursor: pointer;
+            height: $button;
             left: ($panel - $padding * 2) / 2 - $button / 2;
+            margin: 0 0 1px 0;
             top: ($panel - $padding * 2) / 2 - $button / 2;
+            width: $button;
 
-            &{
-              height: $button;
-              width: $button;
-            }
+            &:active{ margin: 1px 0 0 0; }
 
             .play{
 

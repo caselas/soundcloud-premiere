@@ -40,10 +40,13 @@ body {
         -webkit-border-radius: 5px;
         color: white; }
     body .player .panel.left .artwork .button {
+      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0)));
       border: 3px solid white;
       border-radius: 100px;
       -moz-border-radius: 100px;
       -webkit-border-radius: 100px; }
+      body .player .panel.left .artwork .button:hover {
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, 0.8))); }
       body .player .panel.left .artwork .button .play {
         border-color: transparent transparent transparent white; }
     body .player .panel.right ol.tracks li {

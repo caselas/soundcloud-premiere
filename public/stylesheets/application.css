@@ -87,11 +87,13 @@ body {
             padding: 5px 10px; }
         body .player .panel.left .artwork .button {
           cursor: pointer;
+          height: 75px;
           left: 115px;
-          top: 115px; }
-          body .player .panel.left .artwork .button {
-            height: 75px;
-            width: 75px; }
+          margin: 0 0 1px 0;
+          top: 115px;
+          width: 75px; }
+          body .player .panel.left .artwork .button:active {
+            margin: 1px 0 0 0; }
           body .player .panel.left .artwork .button .play {
             border-style: solid;
             border-width: 15px;
