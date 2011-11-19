@@ -245,12 +245,21 @@ body{
 
     .share{
 
-      width: 200px;
+      width: 340px;
 
-      .facebook-like-button{
-        left: 110px;
-        position: absolute;
+      .fb-like{
         top: 0px;
+        margin-left: 27px;
+        position: relative;
+        width: 100px;
+      }
+      .twitter-share-button{
+        top: 3px;
+        position: relative;
+      }
+      #___plusone_0{
+        position: relative;
+        top: 3px;
       }
 
     }

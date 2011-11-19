@@ -137,11 +137,18 @@ body {
       body .footer .links a {
         margin-right: 10px; }
     body .footer .share {
-      width: 200px; }
-      body .footer .share .facebook-like-button {
-        left: 110px;
-        position: absolute;
-        top: 0px; }
+      width: 340px; }
+      body .footer .share .fb-like {
+        top: 0px;
+        margin-left: 27px;
+        position: relative;
+        width: 100px; }
+      body .footer .share .twitter-share-button {
+        top: 3px;
+        position: relative; }
+      body .footer .share #___plusone_0 {
+        position: relative;
+        top: 3px; }
     body .footer .logo {
       right: 20px; }
       body .footer .logo a {
