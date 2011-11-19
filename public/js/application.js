@@ -14,12 +14,12 @@ var consumer_key = "ePT3qXXTOjw4ZoZcN7ALQ",
 
 // Set a few default options for SoundManager2
 
-soundManager.url = soundmanager_url;
-soundManager.flashVersion = 9;
-soundManager.useFlashBlock = false;
-soundManager.useHighPerformance = true;
-soundManager.wmode = 'transparent';
-soundManager.useFastPolling = true;
+// soundManager.url = soundmanager_url;
+// soundManager.flashVersion = 9;
+// soundManager.useFlashBlock = false;
+// soundManager.useHighPerformance = true;
+// soundManager.wmode = 'transparent';
+// soundManager.useFastPolling = true;
 
 // ## Begin Initializing Player
 
@@ -182,7 +182,7 @@ $(function(){
 	
 	// Wait for SoundManager2 to load
 	
-	soundManager.onready(function() {
+	SC.whenStreamingReady(function(){
 		
 		// ## Get SoundCloud Data
 		

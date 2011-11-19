@@ -2,7 +2,7 @@
 - # Do not touch!
 
 - #url = "http://premiere.heroku.com"
-- url = ""
+- url = "http://0.0.0.0:3001"
 
 !!!
 %html
@@ -32,8 +32,8 @@
 		/ And the directory where your SoundManager2 swf files can be found
 	
 		:javascript		
-			var url = "http://soundcloud.com/foofighters/sets/wasting-light",
-					soundmanager_url = "/swfs/";
+			var url = "http://soundcloud.com/foofighters/sets/wasting-light";
+			
 					
 		- # (2.5) Expert: This adds the javascript variables needed to perform a Social to Unlock.
 							
@@ -70,21 +70,26 @@
 			:javascript
 				var tab = true;
 
-		%script{:type => "text/javascript", :src => "#{url}/js/jquery.min.js"}
-		%script{:type => "text/javascript", :src => "#{url}/js/soundmanager2.js"}
-		%script{:type => "text/javascript", :src => "#{url}/js/jquery.jscrollpane.min.js"}
-		%script{:type => "text/javascript", :src => "#{url}/js/jquery.mousewheel.js"}
-		%script{:type => "text/javascript", :src => "#{url}/js/modernizr.js"}
-		%script{:type => "text/javascript", :src => "#{url}/js/jquery.color.min.js"}
-		%script{:type => "text/javascript", :src => "#{url}/js/cors.js"}
-		%script{:type => "text/javascript", :src => "#{url}/js/application.js"}
+		%script{:type => "text/javascript", :src => "/js/jquery.min.js"}
+		%script{:type => "text/javascript", :src => "http://connect.soundcloud.com/sdk.js"}
+		%script{:type => "text/javascript", :src => "/js/jquery.jscrollpane.min.js"}
+		%script{:type => "text/javascript", :src => "/js/jquery.mousewheel.js"}
+		%script{:type => "text/javascript", :src => "/js/modernizr.js"}
+		%script{:type => "text/javascript", :src => "/js/jquery.color.min.js"}
+		%script{:type => "text/javascript", :src => "/js/cors.js"}
+		:javascript
+			SC.initialize({
+				client_id: "ePT3qXXTOjw4ZoZcN7ALQ",
+				redirect_uri: "#{url}/callback.html"
+			});
+		%script{:type => "text/javascript", :src => "/js/application.js"}
 		
 		/ (4) Include both stylesheets
 		/ Add your custom css in the provided area below or simply locally adjust theme.css accordingly
 		/ For rapid theme development, check the theme.scss file provided [here](https://github.com/soundcloud/soundcloud-premiere/blob/master/public/stylesheets/sass/theme.scss): 
 	
-		%link{:rel => "stylesheet", :href => "#{url}/stylesheets/application.css", :type => 'text/css', :media => "screen"}
-		%link{:rel => "stylesheet", :href => "#{url}/stylesheets/theme.css", :type => 'text/css', :media => "screen"}
+		%link{:rel => "stylesheet", :href => "/stylesheets/application.css", :type => 'text/css', :media => "screen"}
+		%link{:rel => "stylesheet", :href => "/stylesheets/theme.css", :type => 'text/css', :media => "screen"}
 		
 		:css			
 			/* body{ background-image: url(image.jpg); } */
