@@ -4,18 +4,17 @@
 // ### Basic Default Variables
 
 // Declare some default variables that will be used in the application.
-var consumer_key = "ePT3qXXTOjw4ZoZcN7ALQ",
-    page_title = document.title,
-    messageTimer = 0;
+var consumer_key  = "ePT3qXXTOjw4ZoZcN7ALQ",
+    page_title    = document.title,
+    messageTimer  = 0;
 
 // ### SoundManager2 Default Options
-
 // Set a few default options for SoundManager2
-soundManager.url = soundmanager_url;
-soundManager.flashVersion = 9;
-soundManager.useFlashBlock = false;
+soundManager.url            = soundmanager_url;
+soundManager.flashVersion   = 9;
+soundManager.useFlashBlock  = false;
 soundManager.useHighPerformance = true;
-soundManager.wmode = 'transparent';
+soundManager.wmode          = 'transparent';
 soundManager.useFastPolling = true;
 
 // ## Begin Initializing Player
@@ -23,6 +22,7 @@ soundManager.useFastPolling = true;
 $.fn.ready(function() {
 
   // If Facebook, resize the tab accordingly
+  // XXX: This throws errors with Fb's all.js loaded async, need to check
   //if (typeof tab != "undefined") { FB.Canvas.setSize({ width: 520, height: 600 }); }
 
   // Ping Bit.ly
@@ -271,7 +271,6 @@ $.fn.ready(function() {
   // ## GUI Events
   // ### List Item Click
   // Bind a *click* event to each list item in the track list
-
   $('.tracks li').live('click', function(){
     // Create variables for the track, its data, and whether or not it's playing
     var $track = $(this),
@@ -309,7 +308,6 @@ $.fn.ready(function() {
   // ## Functions
   // ### Unlock Player
   // This function animates the player open and adds a bind event to the header area
-
   var unlockPlayer = function(){
 
     // Click/Play the first track
@@ -378,7 +376,6 @@ $.fn.ready(function() {
   // It attempts to color it using canvas, if available, using the time div background color.
   // If canvas is not available, the waveform will be added as an image instead.
   // I use the following libraries to pull this off: modernizr, jquery.color, and jquery.getimagedata.
-
   var loadWaveform = function(track){
     // #### Canvas Available
     if( $('html').hasClass('canvas') ) {
@@ -426,7 +423,6 @@ $.fn.ready(function() {
       }
 
     // #### Canvas Not Available
-
     } else {
 
       $('.waveform').show();
@@ -579,3 +575,30 @@ $.fn.ready(function() {
   }
 
 });
+
+// Load the holy trinity async as per
+// http://www.phpied.com/social-button-bffs/
+// and https://gist.github.com/1025811
+(function(doc, script) {
+  var js,
+      fjs = document.getElementsByTagName(script)[0],
+      frag = doc.createDocumentFragment(),
+      add = function(url, id) {
+        if (doc.getElementById(id)) {return;}
+        js = doc.createElement(script);
+        js.src = url;
+        js.id = id || null;
+        frag.appendChild(js);
+      };
+
+  // Google Analytics
+  add(('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js', 'ga');
+  // Google+ button
+  add('https://apis.google.com/js/plusone.js');
+  // Facebook SDK
+  add('//connect.facebook.net/en_US/all.js#xfbml=1', 'facebook-jssdk');
+  // Twitter SDK
+  add('//platform.twitter.com/widgets.js');
+
+  fjs.parentNode.insertBefore(frag, fjs);
+}(document, 'script'));
