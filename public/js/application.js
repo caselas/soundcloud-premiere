@@ -6,7 +6,7 @@
 
 // Declare some default variables that will be used in the application.
 
-var consumer_key = "ePT3qXXTOjw4ZoZcN7ALQ",
+var consumer_key = "da3d82c417867324eafc370b13c9b860",
 		page_title = document.title,
 		messageTimer = 0;
 
@@ -180,7 +180,7 @@ $(function(){
 
 	$(window).resize();
 	
-	// Wait for SoundManager2 to load
+	// Wait for SC JS SDK to load
 	
 	SC.whenStreamingReady(function(){
 		
@@ -190,7 +190,7 @@ $(function(){
 		
 		//getCORS('http://api.soundcloud.com/resolve?url=' + url + '&format=json&consumer_key=' + consumer_key, function(playlist){
 			
-		$.getJSON('http://api.soundcloud.com/resolve?url=' + url + '&format=json&consumer_key=' + consumer_key + '&callback=?', function(playlist){
+    $.getJSON('http://api.soundcloud.com/resolve?url=' + url + '&format=json&consumer_key=' + consumer_key + '&callback=?', function(playlist){
 			
 			// Once playlist data is loaded, apply the artwork, user avatar, and user username to the player.
 			
