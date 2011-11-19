@@ -1,21 +1,24 @@
 - ## Enter some variables to set up your Premiere
 
 - # Enter your Heroku domain (without http://)
-- domain = ""
+- domain = "0.0.0.0:4567"
 - if domain != ""
   - url = "http://" + domain
 
 - # If using Like to unlock, enter your Fb App ID here
-- fb_app = "3874678290345"
+- fb_app = "204738366205341"
 
 - # Enter the url to your SoundCloud set
-- sc_album = "http://soundcloud.com/foofighters/sets/wasting-light"
+- sc_album = "http://soundcloud.com/mark/sets/life-death-love-friendship"
 
 - # Enter a preformatted Twitter message
 - twitter_message = "Visit [link] to unlock the full stream of @FooFighters's new record #WastingLight."
 
 - # Enter the buy link of your album, leave empty if none
 - buy_link = "http://www.smarturl.it/fooswlpreorder"
+
+- # Enter your Google Analytics ID
+- ga_ID = "UA-27145094-1"
 
 !!!
 %html
@@ -32,8 +35,8 @@
     %meta{:property => "og:title",        :content => "Premiere"}
     %meta{:property => "og:description",  :content => 'The first listen, powered by SoundCloud.'}
     %meta{:property => "og:type",         :content => "album"}
-    %meta{:property => "og:image",        :content => "http://#{url}/images/artwork.jpg"}
-    %meta{:property => "og:url",          :content => "http://#{url}"}
+    %meta{:property => "og:image",        :content => "#{url}/images/artwork.jpg"}
+    %meta{:property => "og:url",          :content => "#{url}"}
     %meta{:property => "og:site_name",    :content => "SoundCloud"}
     %meta{:property => "og:video",        :content => "http://player.soundcloud.com/player.swf?url=#{sc_album}&color=000000&auto_play=true&player_type=artwork"}
     %meta{:property => "og:video:height", :content => "425"}
@@ -44,9 +47,11 @@
     :javascript
       var url               = "#{sc_album}",
           soundmanager_url  = "/swfs/",
-          tab               = true;
+          tab               = true,
+          _gaq              = [['_setAccount', '#{ga_ID}'], ['_trackPageview']];
+      _gaq.push(['_trackPageview']);
 
-    - # (2.5) Expert: This adds the javascript variables needed to perform a Social to Unlock.
+    - # (2) Expert: This adds the javascript variables needed to perform a Social to Unlock.
     - if defined?(lock) && lock
 
       - # (2.5) Social to Unlock
@@ -66,24 +71,20 @@
           var lock     = "facebook",
               unlocked = #{@signed_request['page']['liked']};
 
-    - # (3) Include all appropriate Javascript
-    - # If it's a POST, it's coming from Facebook, so include their JS SDK and set a tab variable
-    - if request.request_method == "POST"
-      %script{:src => "http://connect.facebook.net/en_US/all.js"}
-
-    - # (4) Include both stylesheets
+    - # (3) Include both stylesheets
     - # Add your custom css in the provided area below or simply locally adjust theme.css accordingly
     - # For rapid theme development, check the theme.scss file provided [here](https://github.com/soundcloud/soundcloud-premiere/blob/master/public/stylesheets/sass/theme.scss):
-    %link{:rel => "stylesheet", :href => "/stylesheets/application.css", :type => 'text/css'}
-    %link{:rel => "stylesheet", :href => "/stylesheets/theme.css", :type => 'text/css'}
+    %link{:rel => "stylesheet", :href => "/stylesheets/application.css"}
+    %link{:rel => "stylesheet", :href => "/stylesheets/theme.css"}
 
   %body
 
-    - # (5) Be sure to edit the links and share widgets within
+    - # (4) Be sure to edit the links and share widgets within
     .footer
       .share
-        <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-        <iframe src="http://www.facebook.com/plugins/like.php?href=#{domain}&layout=button_count&show_faces=false&width=90&action=like&colorscheme=light&height=20" scrolling="no" frameborder="0" class="facebook-like-button" style="border:none; overflow:hidden; width:90px; height:20px;" allowTransparency="true"></iframe>
+        %div{:class => "fb-like",              :data => {:send => false, :layout => "button_count", :width => 280}}
+        %a{  :class => "twitter-share-button", :data => {:count => "horizontal"}} Tweet
+        %div{:class => "g-plusone",            :data => {:size => "medium"}}
 
       .links
         - if buy_link != ""
@@ -92,11 +93,13 @@
       .logo
         %a{:href => "http://soundcloud.com", :target => "_blank"} &nbsp;
 
+    #fb-root
+
     %script{:src => "#{url}/js/jquery.min.js"}
     %script{:src => "#{url}/js/soundmanager2.js"}
     %script{:src => "#{url}/js/jquery.jscrollpane.min.js"}
     %script{:src => "#{url}/js/jquery.mousewheel.js"}
     %script{:src => "#{url}/js/modernizr.js"}
     %script{:src => "#{url}/js/jquery.color.min.js"}
-    %script{:src => "#{url}/js/cors.js"}
     %script{:src => "#{url}/js/application.js"}
+
