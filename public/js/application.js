@@ -397,7 +397,7 @@ $.fn.ready(function() {
       } else {
 
         // If not, get the data and change each pixel color to match background
-        $.getJSON('http://premiere.heroku.com/waveform?callback=?', { url: track.waveform_url }, function(data){
+        $.getJSON('http://' + window.location.host + '/waveform?callback=?', { url: track.waveform_url }, function(data){
 
           var image = new Image;
           image.src = data.data;
