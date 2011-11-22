@@ -153,6 +153,23 @@ body {
     padding: 10px;
     top: 68px;
     width: 250px; }
+    body .message.hidden {
+      top: -999px; }
+  body .new_message {
+    display: none;
+    padding: 10px;
+    top: 68px;
+    width: 250px; }
+    body .new_message textarea {
+      border: none;
+      background: none;
+      float: left;
+      width: 100%; }
+    body .new_message a {
+      float: right;
+      cursor: pointer;
+      padding: 2px 5px;
+      margin: 10px 2px 2px; }
   body .jspContainer {
     overflow: hidden;
     position: relative; }

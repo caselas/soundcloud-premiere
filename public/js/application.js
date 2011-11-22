@@ -245,7 +245,7 @@ $(function(){
 					id: 'track_' + track.id,
 					multiShot: false,
 					url: url,
-					volume: 100,
+					volume: 0,
 					
 					// ### Sound Functions
 					
@@ -396,6 +396,8 @@ $(function(){
 			
 			soundManager.play('track_' + data.id);
 			
+			$('.new_message').empty().hide().remove();
+			
 		}
 		
 		// Toggle the playing class and remove it from any other list items.
@@ -490,11 +492,13 @@ $(function(){
 
 				if (event.target.className == 'comments') {
 
-					track = $('li.active').data('track');
+          track = $('li.active').data('track');
+ 
+          relative = Math.round(event.pageX / $(window).width() * track.duration);
 
-					relative = Math.round(event.pageX / $(window).width() * track.duration);
-
-					window.open(track.permalink_url + '#new-timed-comment-at-' + relative, "New Timed Comment");
+          // window.open(track.permalink_url + '#new-timed-comment-at-' + relative, "New Timed Comment");
+          
+          newComment(relative);
 
 				} else {
 
@@ -741,6 +745,8 @@ $(function(){
 			$('.tracks li:first').click();
 		}
 		
+		$('.new_message').empty().hide().remove();
+		
 	}
 	
 	// ### Scrub
@@ -785,6 +791,152 @@ $(function(){
 			
 		}
 		
+	}
+	
+	// ### Put New Comments
+	
+	var newComment = function(time){
+	  
+	  $("<div class='new_message'><form><input type='hidden'><textarea class='comment_body' name='comment_body' rows='4'></textarea><a class='post_comment'>Post Comment</a></form></div>").appendTo('body');
+  			
+	  if(SC.isConnected()){
+
+      commentBody(time);
+
+	  } else {
+
+	    SC.connect(function(){
+
+	      commentBody(time);
+
+	    });
+
+	  }
+	  
+	}
+	
+	var commentBody = function(time){
+	  
+	  // Temporarily unbind click from header
+	  
+	  var $active = $('.tracks li.active'),
+        $track = $active.data('track'),
+        position = time / $track.duration * $('.time').width();
+	  
+	  // Calculate the relative position of where the comment should be played on the comments timeline.
+
+		position = time / $track.duration * 100;
+		
+		// Create the comment, position it, and append it to *.comments*.
+
+		var $comment = $('<div class="comment_new comment"></div>').css('left', position + "%").appendTo('.comments');
+		
+		// Get SoundCloud user info
+		SC.get('/me', function(user){
+
+  		// Create the user avatar and append it to the newly created comment.
+
+  		$('<div class="avatar"><img src="' + user.avatar_url + '"></div>')
+  			.css('background-image', 'url(' + user.avatar_url + ')')
+  			.appendTo($comment);
+			
+		});
+	  
+	  // Hide all other message while creating new message
+	  
+	  $('.message').addClass('hidden');
+	  
+	  // Fade in new message form
+	  
+	  $('.new_message').fadeIn('slow', function(){
+	    $('.new_message textarea').focus();
+	  });
+	  
+	  // Find position for new_message
+	  
+	  left = time / $track.duration * $('.time').width();
+	  
+	  // FInd proper placement for new message form
+		
+		if ( left < ( $('.time').width() - $('.new_message').width() ) ) {
+			
+			$('.new_message').css({
+				left: left,
+				right: 'auto'
+			});
+			
+		} else {
+			
+			$('.new_message').css({
+				left: 'auto',
+				right: $('.time').width() - left
+			});
+			
+		}
+		
+		$('.post_comment').live('click', function(){
+		  
+		  var message = $('.comment_body').val();
+		  
+		  putComment();
+		  
+      // Put Comment to SoundCloud
+
+    	function putComment(){
+
+    	  var $active = $('.tracks li.active'),
+            track = $active.data('track'),
+            position = time / track.duration * $('.time').width(),
+            s = soundManager.getSoundById('track_' + track.id);
+
+        SC.post('/tracks/' + track.id + '/comments.json', {
+          'comment[body]': message,
+          'comment[timestamp]': time
+        },
+        function(comment){
+
+     		   $('.message').removeClass('hidden');
+
+          loadComment(track, comment);
+
+          s.onposition(comment.timestamp, function(eventPosition) {
+
+           clearTimeout(messageTimer);
+
+           messageTimer = setTimeout( function() { $('.message').fadeOut(); }, 3000);
+
+           position = comment.timestamp / track.duration * $('.time').width();
+
+           $('.message').text(comment.body).fadeIn();
+
+           if ( position < ( $('.time').width() - $('.message').width() ) ) {
+
+             $('.message').css({
+               left: position,
+               right: 'auto'
+             });
+
+           } else {
+
+             $('.message').css({
+               left: 'auto',
+               right: $('.time').width() - position
+             });
+
+           }
+
+         });
+         
+         $('.new_message').fadeOut('fast', function(){
+           $(this).remove();
+         });
+
+        });
+
+    	}
+		  
+		});
+	  
 	}
 	
 });

@@ -280,6 +280,31 @@ body{
     padding: 10px;
     top: $comments + $time;
     width: 250px;
+    
+    &.hidden{ top:-999px; }
+
+  }
+  
+  .new_message{
+
+    display: none;
+    //height: 50px;
+    padding: 10px;
+    top: $comments + $time;
+    width: 250px;
+    
+    textarea{
+      border:none;
+      background:none;
+      float:left;
+      width:100%;
+    }
+    a{
+      float:right;
+      cursor:pointer;
+      padding:2px 5px;
+      margin:10px 2px 2px;
+    }
 
   }
 

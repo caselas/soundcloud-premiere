@@ -180,6 +180,27 @@ body{
     font-size: 10px;
 
   }
+  
+  .new_message{
+
+    background-color: black;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 10px;
+    
+    textarea{
+      color:white;
+    }
+    a{
+      color:white;
+      font-size:12px;
+      border:1px inset black;
+      border:1px inset rgba(0,0,0,0.01);
+      @include border-radius($radius);
+      &:hover{ color:$accent-color; }
+    }
+
+  }
 
   // Scroll Bar
 
