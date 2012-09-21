@@ -432,7 +432,17 @@ $(function(){
 		
 		$('li.active').click();
 		
-		if (typeof tab != "undefined") {
+		if (top != self) { // Not just for facebook, but any iframe embed
+			
+			// Add nice hover event
+			$('body').hover(
+				function() {
+					$('.left').fadeOut('fast');
+				},
+				function() {
+					$('.left').fadeIn('fast');
+				}
+			);
 			
 			// If it's a Facebook lock, simply fade out the artwork.
 		
